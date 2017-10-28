@@ -1,6 +1,15 @@
+#Compilation artifacts
 *.o
 *.obj
 *.elf
 *.exe
 *.out
+*.a
+dcgps
+dcgpsDEBUG
 
+#Vim artifacts
+*.swp
+
+#Log files
+*.log
