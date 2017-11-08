@@ -32,7 +32,7 @@ bool usedFlags[MAXCHANNELS];
 --
 -- DESIGNER:	Vafa Dehghan Saei, William Murphy
 --
--- PROGRAMMER:	 Vafa Dehghan Saei, William Murphy
+-- PROGRAMMER:	 Vafa Dehghan Saei
 --
 -- INTERFACE:	void print_gps_data(const struct gps_data_t *gpsdata) 
 --					const struct gps_data_t *gpsdata: The struct that holds all the gps data/info
