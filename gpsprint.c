@@ -2,24 +2,53 @@
 
 #define MAXCHANNELS 72
 #define MAX_POSSIBLE_SATS 70
-
 typedef struct satellite_t satellite_t;
-
 bool usedFlags[MAXCHANNELS];
 
-static void print_visible(const struct gps_data_t *gpsdata, const int i)
-{
-	fprintf(stdout, "PRN: %3d Elevation: %02d Azimuth: %03d SNR: %02d Used: %c\n",
-			gpsdata->skyview[i].PRN, gpsdata->skyview[i].elevation, gpsdata->skyview[i].azimuth, 
-			(int)gpsdata->skyview[i].ss, gpsdata->skyview[i].used ? 'Y' : 'N');
-} 
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE:		gpsprint.c - The main file to print the gps data
+--
+-- PROGRAM:			GPS
+--
+-- FUNCTIONS:		void print_gps_data(const struct gps_data_t *gpsdata)
+--					
+--
+-- DATE:			November 7, 2017
+--
+--
+-- DESIGNER:		Vafa Dehghan Saei, William Murphy
+--
+-- PROGRAMMER:		Vafa Dehghan Saei, William Murphy
+--
+-- NOTES:			This is where the printing of the gps data is done.
+----------------------------------------------------------------------------------------------------------------------*/
 
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION:	print_gps_data
+--
+-- DATE:		November 7, 2017
+--
+--
+-- DESIGNER:	Vafa Dehghan Saei, William Murphy
+--
+-- PROGRAMMER:	 Vafa Dehghan Saei, William Murphy
+--
+-- INTERFACE:	void print_gps_data(const struct gps_data_t *gpsdata) 
+--					const struct gps_data_t *gpsdata: The struct that holds all the gps data/info
+--
+--
+-- RETURNS:		Void
+--
+-- NOTES:		Prints the GPS data if there are satelites visible. Prints the PRN, elevation, azimuth and fix time.
+--
+----------------------------------------------------------------------------------------------------------------------*/
 void print_gps_data(const struct gps_data_t *gpsdata)
 {
 	for (int i = 0; i < MAXCHANNELS; i++)
 	{
 		usedFlags[i] = false;
-		for (int j = 0; j < gpsdata->satellites_used; j++)
+		for (int j = 0; j < gpsdata->satellites_used; j++) 
 		{
 			if (gpsdata->skyview[j].used == gpsdata->skyview[i].PRN)
 			{
@@ -34,7 +63,8 @@ void print_gps_data(const struct gps_data_t *gpsdata)
 		{
 			if (i < gpsdata->satellites_visible) 
 			{
-				print_visible(gpsdata, i);
+				gpsdata->skyview[i].PRN, gpsdata->skyview[i].elevation, gpsdata->skyview[i].azimuth, 
+			(int)gpsdata->skyview[i].ss, gpsdata->skyview[i].used ? 'Y' : 'N');
 			}
 		}	
 	}
