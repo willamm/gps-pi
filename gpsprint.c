@@ -44,7 +44,7 @@ void print_gps_data(const struct gps_data_t *gpsdata)
 		char result[70];
 		if (strftime(result, sizeof result, "%c", gmtime(&seconds)))
 		{
-			fprintf(stdout, "Time: %s ", result);
+			fprintf(stdout, "Time: %s \n", result);
 		}
 		else 
 		{
@@ -54,7 +54,7 @@ void print_gps_data(const struct gps_data_t *gpsdata)
 	if (gpsdata->fix.mode >= MODE_2D && isnan(gpsdata->fix.latitude) == 0)
 	{
 		char* deg_str = deg_to_str(deg_dd, fabs(gpsdata->fix.latitude));
-		fprintf(stdout, " Latitude %s %c;", deg_str, (gpsdata->fix.latitude < 0) ? 'S' : 'N');
+		fprintf(stdout, "Latitude: %s %c;", deg_str, (gpsdata->fix.latitude < 0) ? 'S' : 'N');
 		fflush(stdout);
 		free(deg_str);
 	}
@@ -65,7 +65,7 @@ void print_gps_data(const struct gps_data_t *gpsdata)
 	if (gpsdata->fix.mode >- MODE_2D && isnan(gpsdata->fix.longitude) == 0)
 	{
 		char* deg_str = deg_to_str(deg_dd, fabs(gpsdata->fix.longitude));
-		fprintf(stdout, " Longitude %s %c;\n", deg_str, (gpsdata->fix.longitude < 0) ? 'W' : 'E');
+		fprintf(stdout, " Longitude: %s %c;\n", deg_str, (gpsdata->fix.longitude < 0) ? 'W' : 'E');
 		fflush(stdout);
 		free(deg_str);
 	}
