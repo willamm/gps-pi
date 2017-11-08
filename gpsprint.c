@@ -2,8 +2,6 @@
 
 #define MAXCHANNELS 72
 #define MAX_POSSIBLE_SATS 70
-typedef struct satellite_t satellite_t;
-bool usedFlags[MAXCHANNELS];
 
 /*------------------------------------------------------------------------------------------------------------------
 -- SOURCE FILE:		gpsprint.c - The main file to print the gps data
@@ -45,26 +43,18 @@ bool usedFlags[MAXCHANNELS];
 ----------------------------------------------------------------------------------------------------------------------*/
 void print_gps_data(const struct gps_data_t *gpsdata)
 {
-	for (int i = 0; i < MAXCHANNELS; i++)
-	{
-		usedFlags[i] = false;
-		for (int j = 0; j < gpsdata->satellites_used; j++) 
-		{
-			if (gpsdata->skyview[j].used == gpsdata->skyview[i].PRN)
-			{
-				usedFlags[i] = true;
-			}
-		
-		}
-	}
 	if (gpsdata->satellites_visible != 0) 
 	{
 		for (int i = 0; i < MAX_POSSIBLE_SATS; i++)
 		{
 			if (i < gpsdata->satellites_visible) 
 			{
-				gpsdata->skyview[i].PRN, gpsdata->skyview[i].elevation, gpsdata->skyview[i].azimuth, 
-			(int)gpsdata->skyview[i].ss, gpsdata->skyview[i].used ? 'Y' : 'N');
+				fprintf(stdout, "PRN: %3d Elevation: %02d Azimuth: %03d SNR: %02d Used %c\n",
+						gpsdata->skyview[i].PRN
+						, gpsdata->skyview[i].elevation
+						, gpsdata->skyview[i].azimuth
+						, (int)gpsdata->skyview[i].ss
+						, gpsdata->skyview[i].used ? 'Y' : 'N');
 			}
 		}	
 	}
