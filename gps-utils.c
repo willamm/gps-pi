@@ -1,5 +1,44 @@
 #include "gpsdclient.h"
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE:		gps-util.c - The function that reads the gps data.
+--
+-- PROGRAM:			GPS
+--
+-- FUNCTIONS:		int gps_read_data(struct gps_data_t *gpsdata) 
+--					char* deg_to_str(enum deg_str_type type, double degrees)
+--
+--
+-- DATE:			November 7, 2017
+--
+--
+-- DESIGNER:		Vafa Dehghan Saei, William Murphy
+--
+-- PROGRAMMER:		Vafa Dehghan Saei, William Murphy
+--
+-- NOTES:			This file is the entry point of GPS, and where the stream to the gpsd is opened
+--                  This file also mallocs and frees the gps_data_t struct.
+----------------------------------------------------------------------------------------------------------------------*/
 
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION:	gps_read_data
+--
+-- DATE:		November 7, 2017
+--
+--
+-- DESIGNER:	Vafa Dehghan Saei, William Murphy
+--
+-- PROGRAMMER:	 William Murphy
+--
+-- INTERFACE:	int gps_read_data(struct gps_data_t *gpsdata) 
+--					struct gps_data_t *gpsdata: The struct that holds all the gps data/info
+--
+--
+-- RETURNS:		If the function fails, it returns a -1.
+--
+-- NOTES:		Checks to see if there is gps data waitng to be read, and if there it is the data is sent to another function to print.
+--
+----------------------------------------------------------------------------------------------------------------------*/
 int gps_read_data(struct gps_data_t *gpsdata)
 {
 	for(;;)
@@ -24,6 +63,27 @@ int gps_read_data(struct gps_data_t *gpsdata)
 	}
 }
 
+
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION:	deg_to_str
+--
+-- DATE:		November 7, 2017
+--
+--
+-- DESIGNER:	Vafa Dehghan Saei, William Murphy
+--
+-- PROGRAMMER:  Vafa Dehghan Saei
+--
+-- INTERFACE:	int gps_read_data(struct gps_data_t *gpsdata) 
+--				enum deg_str_type type: Here in case if we want to use more printing formats in the future, not in use now
+--				double degrees: the degrees of the gps
+--
+--
+-- RETURNS:		This function returns the latitutde and longitude as a string.
+--
+-- NOTES:		This function takes in the degrees and returns it as a string
+--
+----------------------------------------------------------------------------------------------------------------------*/
 char* deg_to_str(enum deg_str_type type, double degrees)
 {
 	const int MAX_STR_LENGTH = 40;
