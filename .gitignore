@@ -4,9 +4,9 @@
 *.elf
 *.exe
 *.out
-*.a
-dcgps
-dcgpsDEBUG
+
+
+
 
 #Vim artifacts
 *.swp
